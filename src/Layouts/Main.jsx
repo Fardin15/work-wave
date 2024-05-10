@@ -6,7 +6,9 @@ const Main = () => {
   return (
     <div className="bg-[#13072E] text-white max-w-6xl mx-auto mt-5 font-roboto">
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="bg-[#3F2182]">
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );
