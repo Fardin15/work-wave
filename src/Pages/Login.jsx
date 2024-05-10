@@ -51,7 +51,7 @@ const Login = () => {
     }
   }, [user]);
   return (
-    <div className="hero bg-[#3F2182] text-black mt-14">
+    <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white">Login now!</h1>
@@ -116,6 +116,7 @@ const Login = () => {
               className="btn bg-neutral text-white"
             >
               <FaGoogle />
+              <span className="ml-2">Log In With Google</span>
             </button>
           </div>
         </div>

@@ -187,8 +187,9 @@ const Navbar = () => {
         </label>
         {user ? (
           <div className="flex justify-center items-center gap-3">
-            <div className="dropdown dropdown-hover dropdown-end">
+            <div className="dropdown dropdown-hover dropdown-end z-50">
               <img
+                referrerPolicy="no-referrer"
                 tabIndex={0}
                 role="button"
                 className="rounded-full w-10 h-10 tooltip tooltip-bottom"

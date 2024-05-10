@@ -8,7 +8,7 @@ import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { signUpUser, logOut } = useContext(AuthContext);
+  const { user, signUpUser, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignUp = (e) => {
@@ -53,6 +53,7 @@ const SignUp = () => {
         });
         if (result.user) {
           updateProfile(result.user, {
+            ...user,
             displayName: name,
             photoURL: photo,
             // photoURL: "https://example.com/jane-q-user/profile.jpg",
@@ -69,10 +70,10 @@ const SignUp = () => {
       .catch((error) => alert(error.message));
   };
   return (
-    <div className="hero bg-[#3F2182] text-black">
+    <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-white">Sign In now!</h1>
+          <h1 className="text-5xl font-bold text-white">Sign Up now!</h1>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSignUp} className="card-body">
@@ -143,7 +144,7 @@ const SignUp = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button className="btn bg-neutral text-white">Sign In</button>
+              <button className="btn bg-neutral text-white">Sign Up</button>
             </div>
           </form>
         </div>
