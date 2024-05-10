@@ -110,7 +110,7 @@ const Navbar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className="navbar bg-[#13072E]">
       <div className="navbar-start">
@@ -202,14 +202,18 @@ const Navbar = () => {
               />
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-[#3F2182]"
               >
                 <li>
-                  <a>{user.displayName ? user.displayName : "User"}</a>
+                  <a className="text-white">
+                    {user.displayName ? user.displayName : "User"}
+                  </a>
                 </li>
               </ul>
             </div>
-            <NavLink className="btn mr-4">Logout</NavLink>
+            <NavLink className="btn mr-4" onClick={logOut}>
+              Logout
+            </NavLink>
           </div>
         ) : (
           <>

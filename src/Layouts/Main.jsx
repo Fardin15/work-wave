@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 
 const Main = () => {
   return (
-    <div className="bg-[#13072E] text-white max-w-6xl mx-auto mt-5">
+    <div className="bg-[#13072E] text-white max-w-6xl mx-auto mt-5 font-roboto">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
