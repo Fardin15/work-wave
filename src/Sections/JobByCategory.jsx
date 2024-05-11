@@ -1,8 +1,19 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import JobCard from "../Components/JobCard";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const JobByCategory = () => {
+  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    const getJobs = async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/jobs`);
+      setJobs(data);
+    };
+    getJobs();
+  }, []);
   return (
     <Tabs>
       <div className="px-10 py-12">
@@ -19,27 +30,53 @@ const JobByCategory = () => {
             <Tab>All Jobs</Tab>
             <Tab>On-Site Job</Tab>
             <Tab>Remote Job</Tab>
-            <Tab>Hybrid</Tab>
-            <Tab>Part-Time</Tab>
+            <Tab>Hybrid Job</Tab>
+            <Tab>Part-Time Job</Tab>
           </TabList>
         </div>
 
         <TabPanel>
-          <h2>
-            <JobCard></JobCard>
-          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {jobs.map((job) => (
+              <JobCard key={job._id} job={job}></JobCard>
+            ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>On-Site Job</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {jobs
+              .filter((j) => j.category === "On-Site Job")
+              .map((job) => (
+                <JobCard key={job._id} job={job}></JobCard>
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Remote Job</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {jobs
+              .filter((j) => j.category === "Remote Job")
+              .map((job) => (
+                <JobCard key={job._id} job={job}></JobCard>
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Hybrid</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {jobs
+              .filter((j) => j.category === "Hybrid Job")
+              .map((job) => (
+                <JobCard key={job._id} job={job}></JobCard>
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Part-Time</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {jobs
+              .filter((j) => j.category === "Part-Time Job")
+              .map((job) => (
+                <JobCard key={job._id} job={job}></JobCard>
+              ))}
+          </div>
         </TabPanel>
       </div>
     </Tabs>
@@ -47,3 +84,6 @@ const JobByCategory = () => {
 };
 
 export default JobByCategory;
+JobByCategory.propTypes = {
+  jobs: PropTypes.array.isRequired,
+};
