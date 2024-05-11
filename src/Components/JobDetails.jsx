@@ -1,26 +1,22 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Navigate, useLoaderData, useLocation } from "react-router-dom";
-import { max } from "date-fns";
 
 const JobDetails = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
+  console.log(user.displayName, user.email);
   const location = useLocation();
 
   const job = useLoaderData();
   console.log(job);
   const {
-    application_deadline,
-    category,
     job_applicants_number,
     job_banner,
     job_description,
-    job_posting_date,
     job_title,
     max_salary,
     min_salary,
-    name,
-    _id,
   } = job || {};
 
   if (user) {
@@ -54,14 +50,56 @@ const JobDetails = () => {
             <div className="modal-box">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <button className="btn btn-sm btn-circle btn-neutral absolute right-2 top-2">
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-lg">Hello!</h3>
-              <p className="py-4">
-                Press ESC key or click on ✕ button to close
-              </p>
+              <form className="text-black">
+                <div>
+                  <label htmlFor="name" className="text-sm">
+                    Your Name
+                  </label>
+                  <input
+                    name="name"
+                    id="name"
+                    type="text"
+                    defaultValue={user.displayName}
+                    className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="text-sm">
+                    Your Email
+                  </label>
+                  <input
+                    name="email"
+                    id="email"
+                    type="email"
+                    defaultValue={user.email}
+                    className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="resume" className="text-sm">
+                    Your Resume Link
+                  </label>
+                  <input
+                    name="resume"
+                    id="resume"
+                    type="text"
+                    placeholder="Your Resume Link"
+                    className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                  />
+                </div>
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    className="btn btn-block rounded-full bg-gray-600 py-2 px-8 text-white transition "
+                  >
+                    Submit Application
+                  </button>
+                </div>
+              </form>
             </div>
           </dialog>
         </div>

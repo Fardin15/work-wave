@@ -8,127 +8,106 @@ const AddJob = () => {
           action=""
           className="container flex flex-col mx-auto space-y-12"
         >
-          <fieldset className="p-6 rounded-md shadow-sm bg-green-200 dark:bg-gray-50">
+          <fieldset className="p-6 rounded-md shadow-sm dark:bg-gray-50">
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-              {/* country  */}
+              {/* Job Category  */}
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="firstname" className="text-sm">
-                  Country Country
+                  Job Category
                 </label>
                 <select
-                  name="country"
-                  className="select select-bordered w-full"
+                  name="category"
+                  className="select select-bordered w-full text-black"
                 >
                   <option defaultValue={"pick one"}>Pick one</option>
-                  <option value={"USA"}>USA</option>
-                  <option value={"Canada"}>Canada</option>
-                  <option value={"Brazil"}>Brazil</option>
-                  <option value={"Argentina"}>Argentina</option>
-                  <option value={"Maxico"}>Maxico</option>
-                  <option value={"Peru"}>Peru</option>
+                  <option value={"On-Site Job"}>On-Site Job</option>
+                  <option value={"Remote Job"}>Remote Job</option>
+                  <option value={"Hybrid Job"}>Hybrid Job</option>
+                  <option value={"Part-Time Job"}>Part-Time Job</option>
                 </select>
               </div>
-              {/* tourists_spot_name */}
+              {/* Banner of the Job */}
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="lastname" className="text-sm">
-                  Tourist Spot Name
+                  Banner of the Job
                 </label>
                 <input
-                  name="spot"
+                  name="banner"
                   id="lastname"
                   type="text"
-                  placeholder="Tourist Spot Name"
+                  placeholder="URL of The Job Banner"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
-              {/* location */}
+              {/* Your Name */}
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="email" className="text-sm">
-                  Location
+                <label htmlFor="name" className="text-sm">
+                  Your Name
                 </label>
                 <input
-                  name="location"
-                  id="email"
+                  name="name"
+                  id="name"
                   type="text"
-                  placeholder="Location"
+                  placeholder="Your Name"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
-              {/* short description */}
+              {/* Email */}
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="address" className="text-sm">
-                  Short description
+                <label htmlFor="email" className="text-sm">
+                  Email
+                </label>
+                <input
+                  name="email"
+                  id="email"
+                  type="email"
+                  placeholder="Enter Your Email"
+                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                />
+              </div>
+              {/* title */}
+              <div className="col-span-full sm:col-span-3">
+                <label htmlFor="title" className="text-sm">
+                  Job Title
+                </label>
+                <input
+                  name="title"
+                  id="title"
+                  type="text"
+                  placeholder="Job Title"
+                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                />
+              </div>
+              {/* Job Description */}
+              <div className="col-span-full sm:col-span-3">
+                <label htmlFor="description" className="text-sm">
+                  Job Description
                 </label>
                 <input
                   name="description"
-                  id="address"
+                  id="description"
                   type="text"
-                  placeholder="Short description"
+                  placeholder="Job Description"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
-              {/* Image URL */}
-              <div className="col-span-full">
-                <label htmlFor="city" className="text-sm">
-                  Image URL
+              {/* Salary range */}
+              <div className="col-span-full flex justify-between items-center">
+                <label htmlFor="city" className="text-sm mr-2">
+                  Salary range
                 </label>
                 <input
-                  name="photo"
-                  id="city"
-                  type="text"
-                  placeholder="Image URL"
-                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
-                />
-              </div>
-              {/*  average_cost */}
-              <div className="col-span-full sm:col-span-2">
-                <label htmlFor="city" className="text-sm">
-                  Average Cost
-                </label>
-                <input
-                  name="cost"
+                  name="minSalary"
                   id="city"
                   type="number"
-                  placeholder="Give Cost only in number"
-                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                  placeholder="Min Salary"
+                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4 mr-2"
                 />
-              </div>
-              {/* season  */}
-              <div className="col-span-full sm:col-span-2">
-                <label htmlFor="firstname" className="text-sm">
-                  Season name
-                </label>
-                <select name="season" className="select select-bordered w-full">
-                  <option defaultValue={"pick one"}>Pick season</option>
-                  <option value={"Spring"}>Spring</option>
-                  <option value={"Summer"}>Summer</option>
-                  <option value={"Autumn "}>Autumn </option>
-                  <option value={"Winter"}>Winter</option>
-                </select>
-              </div>
-              {/* travel_time */}
-              <div className="col-span-full sm:col-span-1">
-                <label htmlFor="zip" className="text-sm">
-                  Travel Time
-                </label>
                 <input
-                  name="time"
-                  id="zip"
-                  type="text"
-                  placeholder="Travel Time"
-                  className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
-                />
-              </div>
-              {/* totalVisitorsPerYear */}
-              <div className="col-span-full sm:col-span-1">
-                <label htmlFor="zip" className="text-sm">
-                  Total Visitors Per Year
-                </label>
-                <input
-                  name="visitors"
-                  id="zip"
-                  type="text"
-                  placeholder="Total Visitors Per Year"
+                  name="maxSalary"
+                  id="city"
+                  type="number"
+                  placeholder="Max Salary"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
