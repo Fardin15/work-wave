@@ -207,7 +207,7 @@ const Navbar = () => {
               >
                 <li>
                   <a className="text-white">
-                    {user.displayName ? user.displayName : "User"}
+                    {user.displayName ? user?.displayName : "User"}
                   </a>
                 </li>
               </ul>

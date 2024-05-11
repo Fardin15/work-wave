@@ -2,7 +2,7 @@ const Slide = () => {
   return (
     <section>
       <div
-        className="bg-center bg-cover h-[38rem] text-white"
+        className="bg-center bg-cover h-[38rem] text-white rounded-3xl"
         style={{
           backgroundImage: `url(https://i.postimg.cc/0NJcgc5v/banner.jpg)`,
         }}

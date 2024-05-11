@@ -12,7 +12,7 @@ import Slide from "./Slide";
 
 export default function Carousel() {
   return (
-    <>
+    <div className="mt-12 px-10 py-12 rounded-3xl">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -41,6 +41,6 @@ export default function Carousel() {
           <Slide></Slide>
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
