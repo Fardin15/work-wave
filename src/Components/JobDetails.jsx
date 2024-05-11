@@ -27,7 +27,7 @@ const JobDetails = () => {
   const handleApplySubmission = async (e) => {
     e.preventDefault();
     if (user?.email === owner_email) {
-      return alert("tumi parba na");
+      return toast.error("Action Not Permitted");
     }
     const form = e.target;
     const name = form.name.value;

@@ -2,37 +2,54 @@ import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 const AddJob = () => {
   const { user } = useContext(AuthContext);
-  const [deadlineDate, setDeadlineDate] = useState(new Date());
-  const [postDate, setPostDate] = useState(new Date());
-  // date er value startDate er modde ace
+  const navigate = useNavigate();
+  const [application_deadline, setDeadlineDate] = useState(new Date());
+  const [job_posting_date, setPostDate] = useState(new Date());
+  let job_applicants_number = 0;
 
   const handleAddJob = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const jobCategory = form.category.value;
-    const jobBanner = form.banner.value;
+    const category = form.category.value;
+    const job_banner = form.banner.value;
     const name = form.name.value;
-    const email = form.email.value;
-    const jobTitle = form.title.value;
-    const jobDescription = form.description.value;
-    const min_salary = form.minSalary.value;
-    const max_salary = form.maxSalary.value;
+    const owner_email = form.email.value;
+    const job_title = form.title.value;
+    const job_description = form.description.value;
+    const min_salary = parseFloat(form.minSalary.value);
+    const max_salary = parseFloat(form.maxSalary.value);
     const addJobData = {
-      jobCategory,
-      jobBanner,
+      category,
+      job_banner,
       name,
-      email,
-      jobTitle,
-      jobDescription,
+      owner_email,
+      job_title,
+      job_description,
       min_salary,
       max_salary,
-      deadlineDate,
-      postDate,
+      application_deadline,
+      job_applicants_number,
+      job_posting_date,
     };
-    console.log(addJobData);
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/job`,
+        addJobData
+      );
+      console.log(data);
+      if (data.acknowledged) {
+        toast.success("Applied successfully");
+      }
+      navigate("/my-jobs");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div>
@@ -158,7 +175,7 @@ const AddJob = () => {
                 </label>
                 <DatePicker
                   className="px-5 py-3 rounded-lg border"
-                  selected={deadlineDate}
+                  selected={application_deadline}
                   onChange={(date) => setDeadlineDate(date)}
                 />
               </div>
@@ -169,7 +186,7 @@ const AddJob = () => {
                 </label>
                 <DatePicker
                   className="px-5 py-3 rounded-lg border"
-                  selected={postDate}
+                  selected={job_posting_date}
                   onChange={(date) => setPostDate(date)}
                 />
               </div>
@@ -187,6 +204,7 @@ const AddJob = () => {
           {/* Submit button */}
         </form>
       </section>
+      <Toaster />
     </div>
   );
 };

@@ -18,12 +18,16 @@ const JobCard = ({ job }) => {
       <div className="card-body">
         <div className="flex justify-center items-center">
           <p className="">{category}</p>
-          <p className="">Deadline: {application_deadline}</p>
+          <p className="">
+            Deadline: {new Date(application_deadline).toLocaleDateString()}
+          </p>
         </div>
         <p className="card-title">{job_title}</p>
         <p className="font-medium text-xl">Buyer: {name}</p>
         <div>
-          <p className="">Posting Date: {job_posting_date}</p>
+          <p className="">
+            Posting Date: {new Date(job_posting_date).toLocaleDateString()}
+          </p>
           <p className="">Applicants: {job_applicants_number}</p>
         </div>
         <div className="flex justify-between items-center">
