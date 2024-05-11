@@ -1,9 +1,45 @@
+import { useContext, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../Provider/AuthProvider";
+
 const AddJob = () => {
+  const { user } = useContext(AuthContext);
+  const [deadlineDate, setDeadlineDate] = useState(new Date());
+  const [postDate, setPostDate] = useState(new Date());
+  // date er value startDate er modde ace
+
+  const handleAddJob = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const jobCategory = form.category.value;
+    const jobBanner = form.banner.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const jobTitle = form.title.value;
+    const jobDescription = form.description.value;
+    const min_salary = form.minSalary.value;
+    const max_salary = form.maxSalary.value;
+    const addJobData = {
+      jobCategory,
+      jobBanner,
+      name,
+      email,
+      jobTitle,
+      jobDescription,
+      min_salary,
+      max_salary,
+      deadlineDate,
+      postDate,
+    };
+    console.log(addJobData);
+  };
   return (
     <div>
       <p className="font-bold text-lg text-center mt-10">Add Your Job</p>
       <section className="p-6">
         <form
+          onSubmit={handleAddJob}
           noValidate=""
           action=""
           className="container flex flex-col mx-auto space-y-12"
@@ -45,10 +81,11 @@ const AddJob = () => {
                   Your Name
                 </label>
                 <input
+                  readOnly={true}
                   name="name"
                   id="name"
                   type="text"
-                  placeholder="Your Name"
+                  defaultValue={user?.displayName}
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -58,10 +95,11 @@ const AddJob = () => {
                   Email
                 </label>
                 <input
+                  readOnly={true}
                   name="email"
                   id="email"
                   type="email"
-                  placeholder="Enter Your Email"
+                  defaultValue={user?.email}
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -96,6 +134,7 @@ const AddJob = () => {
                 <label htmlFor="city" className="text-sm mr-2">
                   Salary range
                 </label>
+                {/* min salary */}
                 <input
                   name="minSalary"
                   id="city"
@@ -103,12 +142,35 @@ const AddJob = () => {
                   placeholder="Min Salary"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4 mr-2"
                 />
+                {/* max salary */}
                 <input
                   name="maxSalary"
                   id="city"
                   type="number"
                   placeholder="Max Salary"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
+                />
+              </div>
+              {/* deadline date */}
+              <div className="col-span-full sm:col-span-3 text-black">
+                <label htmlFor="lastname" className="text-sm text-white mr-3">
+                  Deadline Date
+                </label>
+                <DatePicker
+                  className="px-5 py-3 rounded-lg border"
+                  selected={deadlineDate}
+                  onChange={(date) => setDeadlineDate(date)}
+                />
+              </div>
+              {/* Posting date */}
+              <div className="col-span-full sm:col-span-3 text-black">
+                <label htmlFor="lastname" className="text-sm text-white mr-3">
+                  Posting Date
+                </label>
+                <DatePicker
+                  className="px-5 py-3 rounded-lg border"
+                  selected={postDate}
+                  onChange={(date) => setPostDate(date)}
                 />
               </div>
 

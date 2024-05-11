@@ -1,7 +1,6 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import JobCard from "../Components/JobCard";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -84,6 +83,3 @@ const JobByCategory = () => {
 };
 
 export default JobByCategory;
-JobByCategory.propTypes = {
-  jobs: PropTypes.array.isRequired,
-};

@@ -1,23 +1,64 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Navigate, useLoaderData, useLocation } from "react-router-dom";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const JobDetails = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
-  console.log(user.displayName, user.email);
   const location = useLocation();
 
   const job = useLoaderData();
   console.log(job);
   const {
+    category,
+    job_posting_date,
+    application_deadline,
     job_applicants_number,
     job_banner,
     job_description,
     job_title,
     max_salary,
     min_salary,
+    _id,
+    owner_email,
   } = job || {};
+
+  const handleApplySubmission = async (e) => {
+    e.preventDefault();
+    if (user?.email === owner_email) {
+      return alert("tumi parba na");
+    }
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const resume = form.resume.value;
+    const appliedData = {
+      name,
+      email,
+      resume,
+      job_applicants_number,
+      job_title,
+      max_salary,
+      min_salary,
+      application_deadline,
+      category,
+      job_posting_date,
+      _id,
+    };
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/applied`,
+        appliedData
+      );
+      console.log(data);
+      if (data.acknowledged) {
+        toast.success("Applied successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (user) {
     return (
@@ -54,7 +95,8 @@ const JobDetails = () => {
                   ✕
                 </button>
               </form>
-              <form className="text-black">
+              {/* apply form */}
+              <form onSubmit={handleApplySubmission} className="text-black">
                 <div>
                   <label htmlFor="name" className="text-sm">
                     Your Name
@@ -63,7 +105,7 @@ const JobDetails = () => {
                     name="name"
                     id="name"
                     type="text"
-                    defaultValue={user.displayName}
+                    defaultValue={user?.displayName}
                     className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                   />
                 </div>
@@ -75,7 +117,7 @@ const JobDetails = () => {
                     name="email"
                     id="email"
                     type="email"
-                    defaultValue={user.email}
+                    defaultValue={user?.email}
                     className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                   />
                 </div>
@@ -103,6 +145,7 @@ const JobDetails = () => {
             </div>
           </dialog>
         </div>
+        <Toaster />
       </div>
     );
   }
