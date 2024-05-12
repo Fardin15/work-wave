@@ -79,7 +79,12 @@ const MyJobs = () => {
                 <td>{new Date(job.job_posting_date).toLocaleDateString()}</td>
                 <td>{job.job_applicants_number}</td>
                 <td>
-                  <Link className="btn bg-gray-500 text-white">Update</Link>
+                  <Link
+                    to={`/update/${job._id}`}
+                    className="btn bg-gray-500 text-white"
+                  >
+                    Update
+                  </Link>
                 </td>
                 <td>
                   <Link

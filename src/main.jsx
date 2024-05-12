@@ -18,6 +18,7 @@ import Login from "./Pages/Login";
 import JobDetails from "./Components/JobDetails";
 import PrivateRoute from "./Privateroute/PrivateRoute";
 import { Toaster } from "react-hot-toast";
+import UpdateJob from "./Pages/UpdateJob";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,12 @@ const router = createBrowserRouter([
             <MyJobs></MyJobs>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateJob></UpdateJob>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/job/${params.id}`),
       },
       {
         path: "/blogs",

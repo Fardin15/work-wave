@@ -1,17 +1,38 @@
-import { useContext, useState } from "react";
+// import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { AuthContext } from "../Provider/AuthProvider";
+// import { AuthContext } from "../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const AddJob = () => {
-  const { user } = useContext(AuthContext);
-  const [application_deadline, setDeadlineDate] = useState(new Date());
-  const [job_posting_date, setPostDate] = useState(new Date());
+const UpdateJob = () => {
+  //   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const job = useLoaderData();
+  const {
+    category,
+    job_banner,
+    job_description,
+    job_title,
+    max_salary,
+    min_salary,
+    _id,
+    owner_email,
+    name,
+    application_deadline: oldDeadline,
+    job_posting_date: postDate,
+  } = job || {};
+
+  const [application_deadline, setDeadlineDate] = useState(
+    new Date(oldDeadline) || new Date()
+  );
+  const [job_posting_date, setPostDate] = useState(
+    new Date(postDate) || new Date()
+  );
   let job_applicants_number = 0;
 
-  const handleAddJob = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
     const category = form.category.value;
@@ -22,7 +43,7 @@ const AddJob = () => {
     const job_description = form.description.value;
     const min_salary = parseFloat(form.minSalary.value);
     const max_salary = parseFloat(form.maxSalary.value);
-    const addJobData = {
+    const updateJobData = {
       category,
       job_banner,
       name,
@@ -36,24 +57,26 @@ const AddJob = () => {
       job_posting_date,
     };
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/job`,
-        addJobData
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/job/${_id}`,
+        updateJobData
       );
       if (data.acknowledged) {
-        toast.success("Job Posted successfully");
+        toast.success("Job Updated successfully");
       }
       form.reset();
+      navigate("/my-jobs");
     } catch (error) {
       console.error(error);
+      toast.error(error.message);
     }
   };
   return (
     <div>
-      <p className="font-bold text-lg text-center mt-10">Add Your Job</p>
+      <p className="font-bold text-lg text-center mt-10">Update Your Job</p>
       <section className="p-6">
         <form
-          onSubmit={handleAddJob}
+          onSubmit={handleUpdate}
           noValidate=""
           action=""
           className="container flex flex-col mx-auto space-y-12"
@@ -69,7 +92,7 @@ const AddJob = () => {
                   name="category"
                   className="select select-bordered w-full text-black"
                 >
-                  <option defaultValue={"pick one"}>Pick one</option>
+                  <option defaultValue={category}>{category}</option>
                   <option value={"On-Site Job"}>On-Site Job</option>
                   <option value={"Remote Job"}>Remote Job</option>
                   <option value={"Hybrid Job"}>Hybrid Job</option>
@@ -85,6 +108,7 @@ const AddJob = () => {
                   name="banner"
                   id="lastname"
                   type="text"
+                  defaultValue={job_banner}
                   placeholder="URL of The Job Banner"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
@@ -99,7 +123,7 @@ const AddJob = () => {
                   name="name"
                   id="name"
                   type="text"
-                  defaultValue={user?.displayName}
+                  defaultValue={name}
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -113,7 +137,7 @@ const AddJob = () => {
                   name="email"
                   id="email"
                   type="email"
-                  defaultValue={user?.email}
+                  defaultValue={owner_email}
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -126,6 +150,7 @@ const AddJob = () => {
                   name="title"
                   id="title"
                   type="text"
+                  defaultValue={job_title}
                   placeholder="Job Title"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
@@ -139,6 +164,7 @@ const AddJob = () => {
                   name="description"
                   id="description"
                   type="text"
+                  defaultValue={job_description}
                   placeholder="Job Description"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
@@ -153,6 +179,7 @@ const AddJob = () => {
                   name="minSalary"
                   id="city"
                   type="number"
+                  defaultValue={min_salary}
                   placeholder="Min Salary"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4 mr-2"
                 />
@@ -161,6 +188,7 @@ const AddJob = () => {
                   name="maxSalary"
                   id="city"
                   type="number"
+                  defaultValue={max_salary}
                   placeholder="Max Salary"
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
@@ -193,7 +221,7 @@ const AddJob = () => {
                   type="submit"
                   className="btn btn-block rounded-full bg-gray-600 py-2 px-8 text-white transition "
                 >
-                  Add
+                  Update Your Job
                 </button>
               </div>
             </div>
@@ -206,4 +234,4 @@ const AddJob = () => {
   );
 };
 
-export default AddJob;
+export default UpdateJob;
