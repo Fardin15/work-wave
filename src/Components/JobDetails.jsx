@@ -1,13 +1,18 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { Navigate, useLoaderData, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const JobDetails = () => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const job = useLoaderData();
   console.log(job);
   const {
@@ -45,6 +50,7 @@ const JobDetails = () => {
       category,
       job_posting_date,
       _id,
+      owner_email,
     };
     try {
       const { data } = await axios.post(
@@ -55,6 +61,8 @@ const JobDetails = () => {
       if (data.acknowledged) {
         toast.success("Applied successfully");
       }
+      form.reset();
+      navigate("/applied-jobs");
     } catch (error) {
       console.error(error);
     }

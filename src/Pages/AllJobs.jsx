@@ -17,8 +17,26 @@ const AllJobs = () => {
 
   if (user) {
     return (
-      <div>
-        <h1 className="font-bold text-lg text-center mt-10 mb-10">All Jobs</h1>
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="font-bold text-3xl text-center mt-10 mb-10">All Jobs</h1>
+        <p className="font-medium text-center max-w-[600px] text-wrap mx-auto mb-10">
+          There are the all jobs list in the table below. Your can see all off
+          them. If you want,you can explore them...
+        </p>
+        {/* search */}
+        <div className="join mx-auto mb-7">
+          <div>
+            <div>
+              <input
+                className="input input-bordered join-item text-black"
+                placeholder="Search by title"
+              />
+            </div>
+          </div>
+          <div className="indicator">
+            <button className="btn join-item">Search</button>
+          </div>
+        </div>
         <div className="overflow-x-auto rounded-2xl text-white">
           <table className="table text-white">
             {/* head */}
@@ -28,7 +46,7 @@ const AllJobs = () => {
                 <th>Job Title</th>
                 <th>Job Posting Date</th>
                 <th>Application Deadline</th>
-                <th>Salary Rang</th>
+                <th>Salary Range</th>
                 <th></th>
               </tr>
             </thead>
@@ -48,7 +66,7 @@ const AllJobs = () => {
                   <td>
                     <Link
                       to={`/job/${job._id}`}
-                      className="btn bg-gray-500 text-white"
+                      className="btn bg-white text-black"
                     >
                       Details
                     </Link>

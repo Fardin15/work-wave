@@ -5,12 +5,17 @@ import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { user, setUser, loginUser, googleSignIn } = useContext(AuthContext);
-
+  const { user, setUser, loginUser, googleSignIn, loading } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -47,9 +52,11 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate(location.state ? location.state : "/");
+      navigate(location.state ? location.state : "/", { replace: true });
     }
   }, [user]);
+
+  if (user || loading) return;
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -8,8 +8,14 @@ import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { user, signUpUser, logOut } = useContext(AuthContext);
+  const { user, signUpUser, logOut, loading } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -69,6 +75,8 @@ const SignUp = () => {
       })
       .catch((error) => alert(error.message));
   };
+
+  if (user || loading) return;
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">
