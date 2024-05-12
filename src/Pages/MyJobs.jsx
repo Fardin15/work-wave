@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyJobs = () => {
   const { user } = useContext(AuthContext);
@@ -9,13 +10,45 @@ const MyJobs = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [user]);
 
   const getData = async () => {
     const { data } = await axios(
       `${import.meta.env.VITE_API_URL}/jobs/${user?.email}`
     );
     setJobs(data);
+  };
+
+  // delete job
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_API_URL}/job/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Job has been deleted.",
+                icon: "success",
+              });
+              // remove the user form the ui
+              const remainingUsers = jobs.filter((job) => job._id !== id);
+              setJobs(remainingUsers);
+            }
+          });
+      }
+    });
   };
   return (
     <div>
@@ -49,7 +82,12 @@ const MyJobs = () => {
                   <Link className="btn bg-gray-500 text-white">Update</Link>
                 </td>
                 <td>
-                  <Link className="btn bg-red-400 text-white">Delete</Link>
+                  <Link
+                    onClick={() => handleDelete(job._id)}
+                    className="btn bg-red-400 text-white"
+                  >
+                    Delete
+                  </Link>
                 </td>
               </tr>
             ))}
