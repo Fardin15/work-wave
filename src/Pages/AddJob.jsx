@@ -42,11 +42,10 @@ const AddJob = () => {
         `${import.meta.env.VITE_API_URL}/job`,
         addJobData
       );
-      console.log(data);
       if (data.acknowledged) {
-        toast.success("Applied successfully");
+        toast.success("Job Posted successfully");
       }
-      navigate("/my-jobs");
+      form.reset();
     } catch (error) {
       console.error(error);
     }

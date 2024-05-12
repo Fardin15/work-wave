@@ -23,7 +23,7 @@ const JobCard = ({ job }) => {
           </p>
         </div>
         <p className="card-title">{job_title}</p>
-        <p className="font-medium text-xl">Buyer: {name}</p>
+        <p className="font-medium text-xl">Owner: {name}</p>
         <div>
           <p className="">
             Posting Date: {new Date(job_posting_date).toLocaleDateString()}
