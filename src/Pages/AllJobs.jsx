@@ -6,14 +6,23 @@ import { AuthContext } from "../Provider/AuthProvider";
 const AllJobs = () => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
-  console.log(jobs);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const getJobs = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/jobs`);
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/jobs?search=${search}`
+      );
+
       setJobs(data);
     };
     getJobs();
-  }, [user]);
+  }, [user, search]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const text = e.target.search.value;
+    setSearch(text);
+  };
 
   if (user) {
     return (
@@ -24,19 +33,24 @@ const AllJobs = () => {
           them. If you want,you can explore them...
         </p>
         {/* search */}
-        <div className="join mx-auto mb-7">
-          <div>
+        <form onSubmit={handleSearch}>
+          <div className="join mx-auto mb-7">
             <div>
-              <input
-                className="input input-bordered join-item text-black"
-                placeholder="Search by title"
-              />
+              <div>
+                <input
+                  name="search"
+                  className="input input-bordered join-item text-black"
+                  placeholder="Search by title"
+                />
+              </div>
+            </div>
+            <div className="indicator">
+              <button type="submit" className="btn join-item">
+                Search
+              </button>
             </div>
           </div>
-          <div className="indicator">
-            <button className="btn join-item">Search</button>
-          </div>
-        </div>
+        </form>
         <div className="overflow-x-auto rounded-2xl text-white">
           <table className="table text-white">
             {/* head */}

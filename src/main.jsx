@@ -19,6 +19,7 @@ import JobDetails from "./Components/JobDetails";
 import PrivateRoute from "./Privateroute/PrivateRoute";
 import { Toaster } from "react-hot-toast";
 import UpdateJob from "./Pages/UpdateJob";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -36,27 +37,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/applied-jobs",
-        element: (
-          <PrivateRoute>
-            <AppliedJobs></AppliedJobs>
-          </PrivateRoute>
-        ),
+        element: <AppliedJobs></AppliedJobs>,
       },
       {
         path: "/add-job",
-        element: (
-          <PrivateRoute>
-            <AddJob></AddJob>
-          </PrivateRoute>
-        ),
+        element: <AddJob></AddJob>,
       },
       {
         path: "/my-jobs",
-        element: (
-          <PrivateRoute>
-            <MyJobs></MyJobs>
-          </PrivateRoute>
-        ),
+        element: <MyJobs></MyJobs>,
       },
       {
         path: "/update/:id",
@@ -86,10 +75,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
     <Toaster />
   </React.StrictMode>

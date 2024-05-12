@@ -11,12 +11,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [navigate, user]);
-
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -56,7 +50,6 @@ const Login = () => {
     }
   }, [user]);
 
-  if (user || loading) return;
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">

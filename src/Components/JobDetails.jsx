@@ -14,7 +14,6 @@ const JobDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const job = useLoaderData();
-  console.log(job);
   const {
     category,
     job_posting_date,
@@ -32,7 +31,7 @@ const JobDetails = () => {
   const handleApplySubmission = async (e) => {
     e.preventDefault();
     if (user?.email === owner_email) {
-      return toast.error("Action Not Permitted");
+      return toast.error("You can't apply on your own post!!");
     }
     const form = e.target;
     const name = form.name.value;
@@ -59,12 +58,12 @@ const JobDetails = () => {
       );
       console.log(data);
       if (data.acknowledged) {
-        toast.success("Applied successfully");
+        toast.success("Applied on this post successfully");
       }
       form.reset();
       navigate("/applied-jobs");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -138,6 +137,7 @@ const JobDetails = () => {
                     id="resume"
                     type="text"
                     placeholder="Your Resume Link"
+                    required
                     className="w-full rounded-md text-black dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                   />
                 </div>

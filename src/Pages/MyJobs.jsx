@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MyJobs = () => {
@@ -50,56 +50,62 @@ const MyJobs = () => {
       }
     });
   };
-  return (
-    <div>
-      <h1 className="font-bold text-lg text-center mt-10 mb-10">
-        My Jobs: {jobs.length} Job
-      </h1>
-      <div className="overflow-x-auto  rounded-2xl">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="text-lg text-white">
-              <th></th>
-              <th>Job Title</th>
-              <th>Category</th>
-              <th>Posting Date</th>
-              <th>Applicants Number</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {jobs.map((job, index) => (
-              <tr key={job._id} className="text-base">
-                <th>{index + 1}</th>
-                <td>{job.job_title}</td>
-                <td>{job.category}</td>
-                <td>{new Date(job.job_posting_date).toLocaleDateString()}</td>
-                <td>{job.job_applicants_number}</td>
-                <td>
-                  <Link
-                    to={`/update/${job._id}`}
-                    className="btn bg-gray-500 text-white"
-                  >
-                    Update
-                  </Link>
-                </td>
-                <td>
-                  <Link
-                    onClick={() => handleDelete(job._id)}
-                    className="btn bg-red-400 text-white"
-                  >
-                    Delete
-                  </Link>
-                </td>
+  if (user) {
+    return (
+      <div>
+        <h1 className="font-bold text-lg text-center mt-10 mb-10">
+          My Jobs: {jobs.length} Job
+        </h1>
+        <div className="overflow-x-auto  rounded-2xl">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="text-lg text-white">
+                <th></th>
+                <th>Job Title</th>
+                <th>Category</th>
+                <th>Posting Date</th>
+                <th>Applicants Number</th>
+                <th></th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {jobs.map((job, index) => (
+                <tr key={job._id} className="text-base">
+                  <th>{index + 1}</th>
+                  <td>{job.job_title}</td>
+                  <td>{job.category}</td>
+                  <td>{new Date(job.job_posting_date).toLocaleDateString()}</td>
+                  <td>{job.job_applicants_number}</td>
+                  <td>
+                    <Link
+                      to={`/update/${job._id}`}
+                      className="btn bg-gray-500 text-white"
+                    >
+                      Update
+                    </Link>
+                  </td>
+                  <td>
+                    <Link
+                      onClick={() => handleDelete(job._id)}
+                      className="btn bg-red-400 text-white"
+                    >
+                      Delete
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <Navigate to="/login" state={location.pathname} replace={true}></Navigate>
   );
 };
 

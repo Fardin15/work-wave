@@ -92,7 +92,9 @@ const UpdateJob = () => {
                   name="category"
                   className="select select-bordered w-full text-black"
                 >
-                  <option defaultValue={category}>{category}</option>
+                  <option disabled selected defaultValue={category}>
+                    {category}
+                  </option>
                   <option value={"On-Site Job"}>On-Site Job</option>
                   <option value={"Remote Job"}>Remote Job</option>
                   <option value={"Hybrid Job"}>Hybrid Job</option>
@@ -110,6 +112,7 @@ const UpdateJob = () => {
                   type="text"
                   defaultValue={job_banner}
                   placeholder="URL of The Job Banner"
+                  required
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -152,6 +155,7 @@ const UpdateJob = () => {
                   type="text"
                   defaultValue={job_title}
                   placeholder="Job Title"
+                  required
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -166,6 +170,7 @@ const UpdateJob = () => {
                   type="text"
                   defaultValue={job_description}
                   placeholder="Job Description"
+                  required
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -181,6 +186,7 @@ const UpdateJob = () => {
                   type="number"
                   defaultValue={min_salary}
                   placeholder="Min Salary"
+                  required
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4 mr-2"
                 />
                 {/* max salary */}
@@ -190,6 +196,7 @@ const UpdateJob = () => {
                   type="number"
                   defaultValue={max_salary}
                   placeholder="Max Salary"
+                  required
                   className="w-full rounded-md text-gray-500 dark:text-gray-50   border-gray-700 dark:border-gray-300 py-3 px-4"
                 />
               </div>
@@ -200,6 +207,7 @@ const UpdateJob = () => {
                 </label>
                 <DatePicker
                   className="px-5 py-3 rounded-lg border"
+                  required
                   selected={application_deadline}
                   onChange={(date) => setDeadlineDate(date)}
                 />

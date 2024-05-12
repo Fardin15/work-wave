@@ -76,7 +76,6 @@ const SignUp = () => {
       .catch((error) => alert(error.message));
   };
 
-  if (user || loading) return;
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
       <div className="hero-content flex-col">
