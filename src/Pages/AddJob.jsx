@@ -10,7 +10,6 @@ const AddJob = () => {
   const { user } = useContext(AuthContext);
   const [application_deadline, setDeadlineDate] = useState(new Date());
   const [job_posting_date, setPostDate] = useState(new Date());
-  let job_applicants_number = 0;
 
   const handleAddJob = async (e) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ const AddJob = () => {
       min_salary,
       max_salary,
       application_deadline,
-      job_applicants_number,
+      job_applicants_number: 0,
       job_posting_date,
     };
     try {

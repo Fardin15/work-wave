@@ -6,13 +6,16 @@ import axios from "axios";
 
 const JobByCategory = () => {
   const [jobs, setJobs] = useState([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const getJobs = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/jobs`);
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/jobs?search=${search}`
+      );
       setJobs(data);
     };
     getJobs();
-  }, []);
+  }, [search]);
   return (
     <Tabs>
       <div className="px-10 py-12">

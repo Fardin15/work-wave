@@ -61,7 +61,6 @@ const AppliedJobs = () => {
                 <th>Job Posting Date</th>
                 <th>Application Deadline</th>
                 <th>Salary Range</th>
-                <th>Applicant Number</th>
               </tr>
             </thead>
             <tbody>
@@ -78,7 +77,6 @@ const AppliedJobs = () => {
                   <td>
                     ${job.min_salary}-${job.max_salary}
                   </td>
-                  <td>{job.job_applicants_number}</td>
                 </tr>
               ))}
             </tbody>

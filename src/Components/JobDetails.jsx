@@ -48,7 +48,7 @@ const JobDetails = () => {
       application_deadline,
       category,
       job_posting_date,
-      _id,
+      jobId: _id,
       owner_email,
     };
     try {
