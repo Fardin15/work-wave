@@ -1,10 +1,10 @@
-import Carousel from "../Components/Carousel";
+import Banner from "../Sections/Banner";
 import JobByCategory from "../Sections/JobByCategory";
 
 const Home = () => {
   return (
     <div>
-      <Carousel></Carousel>
+      <Banner></Banner>
       <JobByCategory></JobByCategory>
     </div>
   );
