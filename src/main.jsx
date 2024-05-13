@@ -19,6 +19,7 @@ import JobDetails from "./Components/JobDetails";
 import { Toaster } from "react-hot-toast";
 import UpdateJob from "./Pages/UpdateJob";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
@@ -78,9 +79,11 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </HelmetProvider>
     </AuthProvider>
     <Toaster />
   </React.StrictMode>

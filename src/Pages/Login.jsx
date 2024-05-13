@@ -3,10 +3,10 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-  const { user, setUser, loginUser, googleSignIn, loading } =
-    useContext(AuthContext);
+  const { user, setUser, loginUser, googleSignIn } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -52,6 +52,9 @@ const Login = () => {
 
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
+      <Helmet>
+        <title>Login || Work Wave</title>
+      </Helmet>
       <div className="hero-content flex-col">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white">Login now!</h1>

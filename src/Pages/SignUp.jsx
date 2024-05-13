@@ -5,10 +5,11 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { user, signUpUser, logOut, loading } = useContext(AuthContext);
+  const { user, signUpUser, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +79,9 @@ const SignUp = () => {
 
   return (
     <div className="hero bg-[#3F2182] text-black my-12">
+      <Helmet>
+        <title>SignUp || Work Wave</title>
+      </Helmet>
       <div className="hero-content flex-col">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white">Sign Up now!</h1>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const AllJobs = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,9 @@ const AllJobs = () => {
   if (user) {
     return (
       <div className="flex flex-col items-center justify-center">
+        <Helmet>
+          <title>Work Wave || All Jobs page</title>
+        </Helmet>
         <h1 className="font-bold text-3xl text-center mt-10 mb-10">All Jobs</h1>
         <p className="font-medium text-center max-w-[600px] text-wrap mx-auto mb-10">
           There are the all jobs list in the table below. Your can see all off

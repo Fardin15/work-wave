@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
   const { user } = useContext(AuthContext);
@@ -53,6 +54,9 @@ const MyJobs = () => {
   if (user) {
     return (
       <div>
+        <Helmet>
+          <title>My Jobs || Work Wave</title>
+        </Helmet>
         <h1 className="font-bold text-lg text-center mt-10 mb-10">
           My Jobs: {jobs.length} Job
         </h1>

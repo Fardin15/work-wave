@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const JobDetails = () => {
   const { user } = useContext(AuthContext);
@@ -77,6 +78,9 @@ const JobDetails = () => {
   if (user) {
     return (
       <div className="card max-w-[700px] mx-auto bg-[#3F2182] shadow-xl rounded-3xl">
+        <Helmet>
+          <title>Details of {job_title} || Work Wave</title>
+        </Helmet>
         <figure>
           <img className="w-full h-[400px]" src={job_banner} alt="Shoes" />
         </figure>

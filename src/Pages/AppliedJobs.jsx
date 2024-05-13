@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AppliedJobs = () => {
   const { user } = useContext(AuthContext);
@@ -31,6 +32,9 @@ const AppliedJobs = () => {
   if (user) {
     return (
       <div>
+        <Helmet>
+          <title>Your applied jobs on Work Wave</title>
+        </Helmet>
         <h1 className="font-bold text-3xl text-center mb-7">
           Your Applied Jobs
         </h1>

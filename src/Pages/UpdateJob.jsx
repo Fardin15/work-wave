@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const UpdateJob = () => {
   //   const { user } = useContext(AuthContext);
@@ -73,6 +74,9 @@ const UpdateJob = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Update Jobs || Work Wave</title>
+      </Helmet>
       <p className="font-bold text-lg text-center mt-10">Update Your Job</p>
       <section className="p-6">
         <form

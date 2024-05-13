@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddJob = () => {
   const { user } = useContext(AuthContext);
@@ -52,6 +53,9 @@ const AddJob = () => {
   if (user) {
     return (
       <div>
+        <Helmet>
+          <title>Add Jobs on Work Wave</title>
+        </Helmet>
         <p className="font-bold text-lg text-center mt-10">Add Your Job</p>
         <section className="p-6">
           <form
