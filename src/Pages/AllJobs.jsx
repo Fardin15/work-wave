@@ -9,7 +9,9 @@ const AllJobs = () => {
   const [search, setSearch] = useState("");
   useEffect(() => {
     const getJobs = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/jobs`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/jobs?search=${search}`
+      );
 
       setJobs(data);
     };
@@ -21,6 +23,8 @@ const AllJobs = () => {
     const text = e.target.search.value;
     setSearch(text);
   };
+
+  console.log(search);
 
   if (user) {
     return (
