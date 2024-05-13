@@ -7,14 +7,11 @@ const AppliedJobs = () => {
   const { user } = useContext(AuthContext);
   const [appliedJob, setAppliedJob] = useState([]);
   const [filter, setFilter] = useState("");
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/applied-jobs/${
-          user?.email
-        }?filter=${filter}`
+        `${import.meta.env.VITE_API_URL}/applied-jobs/${user?.email}`
       );
       setAppliedJob(data);
     };
@@ -23,10 +20,10 @@ const AppliedJobs = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(
+      const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/job-counts?filter=${filter}`
       );
-      setCount(data.count);
+      setAppliedJob(data);
     };
     getData();
   }, [filter]);
@@ -41,6 +38,7 @@ const AppliedJobs = () => {
           <select
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
+            name="category"
             className="select select-bordered w-full max-w-xs"
           >
             <option disabled value="">

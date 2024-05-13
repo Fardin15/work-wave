@@ -49,6 +49,7 @@ const AddJob = () => {
       console.error(error);
     }
   };
+
   if (user) {
     return (
       <div>
