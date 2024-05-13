@@ -24,8 +24,6 @@ const AllJobs = () => {
     setSearch(text);
   };
 
-  console.log(search);
-
   if (user) {
     return (
       <div className="flex flex-col items-center justify-center">

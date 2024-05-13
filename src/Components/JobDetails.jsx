@@ -33,6 +33,13 @@ const JobDetails = () => {
     if (user?.email === owner_email) {
       return toast.error("You can't apply on your own post!!");
     }
+    const today = new Date().toLocaleDateString();
+    if (today > job_posting_date) {
+      toast.error("The deadline is over!!");
+      return (
+        <Navigate to="/" state={{ from: location }} replace:true></Navigate>
+      );
+    }
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;

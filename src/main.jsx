@@ -16,7 +16,6 @@ import AuthProvider from "./Provider/AuthProvider";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import JobDetails from "./Components/JobDetails";
-import PrivateRoute from "./Privateroute/PrivateRoute";
 import { Toaster } from "react-hot-toast";
 import UpdateJob from "./Pages/UpdateJob";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

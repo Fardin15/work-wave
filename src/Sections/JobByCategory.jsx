@@ -23,9 +23,7 @@ const JobByCategory = () => {
           Find Jobs By Categories
         </h1>
         <p className="max-w-2xl mx-auto my-6 text-center font-normal">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse magni
-          pariatur, eligendi ad doloribus velit. Provident quasi distinctio
-          ullam itaque.
+          Hey,Seeker..There are several
         </p>
         <div className="flex items-center justify-center mb-7">
           <TabList>
