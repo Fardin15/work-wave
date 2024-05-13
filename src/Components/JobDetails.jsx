@@ -73,21 +73,52 @@ const JobDetails = () => {
         <figure>
           <img className="w-full h-[400px]" src={job_banner} alt="Shoes" />
         </figure>
-        <div className="card-body text-white">
-          <h2 className="card-title text-wrap">{job_title}</h2>
-          <div className="flex justify-between items-center font-normal text-xl">
-            <p>
+        <div className="card-body text-white mt-4">
+          <h2 className="card-title text-wrap mb-3">
+            <span>
+              <img
+                className="w-[40px] h-[40px]"
+                src="https://i.postimg.cc/Ssv2BNJH/tag.png"
+                alt=""
+              />
+            </span>{" "}
+            {job_title}
+          </h2>
+          <div className="flex justify-between items-center font-normal text-xl mb-3">
+            <p className="flex justify-start items-center gap-2">
+              <span>
+                <img
+                  className="w-[40px] h-[40px]"
+                  src="https://i.postimg.cc/W4nqNwHR/money-1.png"
+                  alt=""
+                />
+              </span>
               <span className="font-light">Salary rang:</span> ${min_salary}-$
               {max_salary}
             </p>
-            <p>applicants number {job_applicants_number}</p>
+            <p className="flex justify-start items-center gap-2">
+              <span>
+                <img
+                  className="w-[40px] h-[40px]"
+                  src="https://i.postimg.cc/SQ79DqrQ/group.png"
+                  alt=""
+                />
+              </span>
+              <span className="font-light">Applicants:</span>{" "}
+              {job_applicants_number}
+            </p>
           </div>
-          <p className="font-normal text-lg text-wrap">
-            <span className="font-light">Description:</span> {job_description}
+          <p className="font-light text-base text-wrap justify-start items-center gap-2 mb-3">
+            <span>
+              <img
+                className="w-[40px] h-[40px]"
+                src="https://i.postimg.cc/8c4jDRkK/job-offer.png"
+                alt=""
+              />
+            </span>
+            <span className="font-medium text-xl">Description:</span>{" "}
+            {job_description}
           </p>
-          {/* <button className="btn bg-slate-200 text-black border-none">
-            Apply
-          </button> */}
           <button
             className="btn"
             onClick={() => document.getElementById("my_modal_3").showModal()}

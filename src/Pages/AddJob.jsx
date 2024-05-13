@@ -201,14 +201,13 @@ const AddJob = () => {
                 <div className="col-span-full">
                   <button
                     type="submit"
-                    className="btn btn-block rounded-full bg-gray-600 py-2 px-8 text-white transition "
+                    className="btn btn-block rounded-full bg-success py-2 px-8 text-white transition "
                   >
-                    Add
+                    Add Job
                   </button>
                 </div>
               </div>
             </fieldset>
-            {/* Submit button */}
           </form>
         </section>
         <Toaster />

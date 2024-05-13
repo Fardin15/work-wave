@@ -82,7 +82,7 @@ const MyJobs = () => {
                   <td>
                     <Link
                       to={`/update/${job._id}`}
-                      className="btn bg-gray-500 text-white"
+                      className="btn bg-white text-black"
                     >
                       Update
                     </Link>
