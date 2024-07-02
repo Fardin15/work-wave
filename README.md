@@ -6,6 +6,18 @@ Live Link: (https://work-wave-ad55e.web.app)
 
 Server github: https://github.com/Fardin15/work-wave-server
 
+## Cloning the Project
+
+To clone the project, follow these steps:
+
+1. Open your terminal or command line interface.
+2. Navigate to the directory where you want to clone the project.
+3. Run the following command:
+
+   bash
+   
+   ``git clone https://github.com/Fardin15/work-wave.git``
+
 #### Features and Characteristics :
 
 - Friendly to the users.
